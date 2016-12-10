@@ -46,20 +46,32 @@ int main (void)
 		int dane[256];
 		int instrukcje[256];
 		int counter;
-		int semafor = 0;
 		};
 
 	struct maszyna stan;
 	char czytany[8];
+	unsigned int sczytany;
 	char c;
 	int licznik = 0;
 	int i = 0;
+	int j = 0;
 
 	do
 		{
 		c = getchar();
-		if (semafor == 0 && spacja(c) == 1) continue;
 		if (spacja(c) == 0 && c != '%')
+			{
+			czytany[i] = c;
+			i++;
+			}
+		if (i == 0 && spacja(c) == 1) continue;
+		if (i !=0 && (spacja(c) == 1 || c == '%'))
+			{
+			sczytany = konwerter (czytany, i);
+			i = 0;
+			switch (licznik)
+			}
+		if (c == '%') licznik++;
 		
 		
 		}
