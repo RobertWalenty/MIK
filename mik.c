@@ -23,8 +23,9 @@ unsigned int konwerter (char deks[8], int length)
 	}
       if (j<=15) suma = suma + j*potega(16, i);
       if (15 < j && j <= 23) suma = suma + (j-16)*potega(8, i);
-      if (23 < j && j<=25) suma = suma + (j-24)*potega(2, i); /*to jest źle, ma być na odwrót */
+      if (j == 25) suma = suma + potega(2, i); 
       if (25<j) suma = suma + (j-26)*potega(10, i);
     }
 return wynik;
 }
+
