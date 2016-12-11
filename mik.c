@@ -53,26 +53,45 @@ int main (void)
 	unsigned int sczytany;
 	char c;
 	int licznik = 0;
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
 	do
-		{
+		{	
 		c = getchar();
 		if (spacja(c) == 0 && c != '%')
 			{
 			czytany[i] = c;
 			i++;
 			}
-		if (i == 0 && spacja(c) == 1) continue;
-		if (i !=0 && (spacja(c) == 1 || c == '%'))
+		else
 			{
-			sczytany = konwerter (czytany, i);
-			i = 0;
-			switch (licznik)
+			if (i == 0 && spacja(c) == 1) continue;
+			if (i !=0 && (spacja(c) == 1 || c == '%'))
+				{
+				sczytany = konwerter (czytany, i);
+				i = 0;
+				switch (licznik)
+				case 0: 
+					{
+					stan.rejestr[j] = sczytany;
+					if (c == '%') j=0;
+					else j++;
+					} break;
+				case 1:
+					{
+					stan.dane[j] = sczytany;
+					if (c == '%') j=0;
+					else j++;
+					} break;
+				case 2:
+					{
+					stan.instrukcje[j] = sczytany;
+					}
+
+				}
+			if (c == '%') licznik++;
 			}
-		if (c == '%') licznik++;
-		
 		
 		}
 	while (c == EOF);
