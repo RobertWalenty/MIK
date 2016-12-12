@@ -64,10 +64,13 @@ int main (void)
 			czytany[i] = c;
 			i++;
 			}
-		else
+		else /*wczytaliśmy spację lub % */
 			{
-			if (i == 0 && spacja(c) == 1) continue;
-			if (i !=0 && (spacja(c) == 1 || c == '%'))
+			if (i == 0) /*czyli nie czytamy żadnej liczby */
+				{
+				if (c == '%') licznik++;
+				}
+			else /*kończymy czytanie liczby */
 				{
 				sczytany = konwerter (czytany, i);
 				i = 0;
@@ -87,10 +90,18 @@ int main (void)
 				case 2:
 					{
 					stan.instrukcje[j] = sczytany;
-					}
+					j++;
+					if (c == '%') stan.counter = j;
+					} break;
+				case 3:
+					{
+					stan.instrukcje[j] = sczytany;
+					j++;
+					} break;
+				if (c == '%') licznik++;
 
 				}
-			if (c == '%') licznik++;
+
 			}
 		
 		}
