@@ -1,14 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int potega (int podstawa, int wykladnik)
+/*int potega (int podstawa, int wykladnik)
 {
   if (wykladnik < 0) return potega (1/podstawa, -wykladnik);
   if (wykladnik == 0) return 1;
   if (wykladnik == 1) return podstawa;
   if (wykladnik%2 == 0) return potega (podstawa*podstawa, wykladnik/2);
   else return podstawa *potega (podstawa*podstawa, (wykladnik-1)/2);
-}
+}*/
 
 unsigned int konwerter (char deks[8], int length)
 {
@@ -24,10 +24,11 @@ unsigned int konwerter (char deks[8], int length)
 		{
 			j++;
 		}
-      if (j<=15) suma = suma + j*potega(16, i);
-      if (15 < j && j <= 23) suma = suma + (j-16)*potega(8, i);
-      if (j == 25) suma = suma + potega(2, i); 
-      if (25<j) suma = suma + (j-26)*potega(10, i);
+      if (j<=15) suma = suma*16 + j;
+      if (15 < j && j <= 23) suma = suma*8 + (j-15);
+      if (j == 24) suma = suma*2 + 1;
+	  if (j == 25) suma = suma*2;
+      if (25<j) suma = suma*10 + (j-25);
     }
 return suma;
 }
@@ -53,8 +54,19 @@ int main (void)
 	unsigned int sczytany;
 	char c;
 	int licznik = 0;
-	int i;
-	int j;
+	int i = 0;
+	int j = 0;
+	
+	while (i<16)
+		{
+		stan.rejestr[i] = 0;
+		i++;
+		}
+	while (j <256)
+		{
+		stan.dane[j] = 0;
+		j++;
+		}
 
 	do
 		{	
